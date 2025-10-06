@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Ejercicio 1.1</title>
+</head>
+<body>
+
+    <h2>Ejercicio 1.1</h2>
+    <p id="resultado">Aquí aparecerá tu dato...</p>
+
+    <script>
+        // Mostrar ventana emergente y guardar el dato ingresado
+        var dato = prompt("Ingresa un dato:");
+
+        // Verificar que el usuario no haya cancelado
+        if (dato !== null) {
+            // Mostrar el dato en el párrafo
+            document.getElementById("resultado").textContent = "Dato ingresado: " + dato;
+        } else {
+            document.getElementById("resultado").textContent = "No ingresaste ningún dato.";
+        }
+    </script>
+
+</body>
+</html>
