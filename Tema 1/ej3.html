@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <title>Mostrar texto en div</title>
+</head>
+<body>
+  <h1>Mostrar texto en un div</h1>
+
+  <label for="texto">Introduce texto:</label>
+  <input id="texto" type="text" placeholder="Escribe algo">
+  <button id="mostrar">Mostrar en una capa</button>
+
+  <div id="salida"></div>
+
+  <script>
+    const input = document.getElementById('texto');
+    const btn = document.getElementById('mostrar');
+    const salida = document.getElementById('salida');
+
+    function mostrarTexto() {
+      salida.textContent = input.value;
+    }
+
+    btn.addEventListener('click', mostrarTexto);
+  </script>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <title>Selector de imágenes (carpeta del proyecto)</title>
+</head>
+<body>
+  <h1>Selector de imágenes (carpeta del proyecto)</h1>
+
+  <label for="lista">Imágenes:</label>
+  <select id="lista">
+    <option value="">-- ninguna --</option>
+  </select>
+
+  <div id="visorContainer">
+    <p id="sinSeleccion">No hay imagen seleccionada.</p>
+    <img id="visor" alt="" style="max-width:100%;display:none;">
+  </div>
+
+  <script>
+    // Pon aquí los nombres de archivo tal como están en tu carpeta (relativos al HTML)
+    const imagenes = [
+      'img/apple.jpg',
+      'img/bananas.jpg',
+      'img/cherries.jpg'
+    ];
+
+    const lista = document.getElementById('lista');
+    const visor = document.getElementById('visor');
+    const sinSeleccion = document.getElementById('sinSeleccion');
+
+    // rellenar select
+    imagenes.forEach((ruta, idx) => {
+      const opt = document.createElement('option');
+      opt.value = ruta; // ruta relativa
+      // mostrar solo el nombre de archivo en la opción
+      opt.textContent = ruta.split('/').pop();
+      lista.appendChild(opt);
+    });
+
+    lista.addEventListener('change', () => {
+      const ruta = lista.value;
+      if (!ruta) {
+        visor.style.display = 'none';
+        visor.src = '';
+        sinSeleccion.style.display = '';
+        return;
+      }
+      visor.src = ruta;
+      visor.alt = ruta.split('/').pop();
+      visor.style.display = '';
+      sinSeleccion.style.display = 'none';
+    });
+  </script>
+</body>
+</html>
