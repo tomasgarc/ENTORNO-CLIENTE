@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Horario de Clases</title>
+</head>
+<body>
+    <h1>¿Está sonando música?</h1>
+
+    <form id="horarioForm">
+        <label for="dia">Día de la semana:</label>
+        <select id="dia" name="dia">
+            <option value="">Día</option>
+            <option value="lunes">Lunes</option>
+            <option value="martes">Martes</option>
+            <option value="miércoles">Miércoles</option>
+            <option value="jueves">Jueves</option>
+            <option value="viernes">Viernes</option>
+        </select>
+        <br><br>
+
+        <label for="hora">Hora de clase:</label>
+        <select id="hora" name="hora">
+            <option value="">Hora</option>
+            <option value="primera">Primera</option>
+            <option value="segunda">Segunda</option>
+            <option value="tercera">Tercera</option>
+            <option value="cuarta">Cuarta</option>
+            <option value="quinta">Quinta</option>
+            <option value="sexta">Sexta</option>
+        </select>
+        <br><br>
+
+        <button type="submit">Comprobar</button>
+    </form>
+
+    <p id="mensaje"></p>
+
+    <script>
+        document.getElementById("horarioForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            const dia = document.getElementById("dia").value.toLowerCase();
+            const hora = document.getElementById("hora").value.toLowerCase();
+            const mensaje = document.getElementById("mensaje");
+
+            if (dia === "jueves" && hora === "sexta") {
+                mensaje.textContent = "Están sonando las flautas!!!";
+            } else {
+                mensaje.textContent = "Silencio";
+            }
+        });
+    </script>
+</body>
+</html>
