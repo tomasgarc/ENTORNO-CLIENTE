@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calculadora con Funciones Flecha</title>
+</head>
+<body>
+  <h2>Calculadora con Funciones Flecha</h2>
+
+  <input type="number" id="num1" placeholder="Número 1">
+  <input type="number" id="num2" placeholder="Número 2">
+  <br><br>
+
+  <button onclick="calcular('+')">+</button>
+  <button onclick="calcular('-')">-</button>
+  <button onclick="calcular('*')">*</button>
+  <button onclick="calcular('/')">/</button>
+
+  <h3>Resultado: <span id="resultado">---</span></h3>
+
+  <script>
+    const sumar = (a, b) => a + b;
+    const restar = (a, b) => a - b;
+    const multiplicar = (a, b) => a * b;
+    const dividir = (a, b) => b !== 0 ? a / b : 'Error (div/0)';
+
+    const calcular = (op) => {
+      const a = parseFloat(document.getElementById('num1').value);
+      const b = parseFloat(document.getElementById('num2').value);
+      let resultado;
+
+      switch (op) {
+        case '+': resultado = sumar(a, b); break;
+        case '-': resultado = restar(a, b); break;
+        case '*': resultado = multiplicar(a, b); break;
+        case '/': resultado = dividir(a, b); break;
+      }
+
+      document.getElementById('resultado').textContent = isNaN(resultado) ? 'Error' : resultado;
+    }
+  </script>
+</body>
+</html>
