@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adivina el número</title>
+</head>
+<body>
+    <h1>Adivina el número</h1>
+    <p>Dime un númeror del 1 al 10 y te  diré si has acertado</p>
+    <input type="number" id="userGuess" min="1" max="10" />
+    <button onclick="checkGuess()">Adivinar</button>
+    <p id="result"></p>
+
+    <script>
+        const numSecreto = Math.floor(Math.random() * 10) + 1;
+        function checkGuess() {
+            const userGuess = parseInt(document.getElementById('userGuess').value);
+            const resultElement = document.getElementById('result');
+
+            if(isNaN(userGuess) || userGuess < 1 || userGuess > 10) {
+                resultElement.textContent = "Ese número no vale máquina";
+                return;
+            }
+
+            if(userGuess === numSecreto) {
+                resultElement.textContent = "Has acertado, eres un grande";
+            } else {
+                resultElement.textContent = "Has fallado";
+            }
+
+        }
+    </script>
+
+</body>
+</html>
