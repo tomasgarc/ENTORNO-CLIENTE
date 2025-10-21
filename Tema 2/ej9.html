@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Días para Navidad</title>
+  <script>
+    function diasParaNavidad() {
+      const hoy = new Date();
+      const añoActual = hoy.getFullYear();
+      let navidad = new Date(añoActual, 11, 25); // Mes 11 = diciembre (enero = 0)
+
+      // Si ya pasó Navidad este año, calcular para el próximo año
+      if (hoy > navidad) {
+        navidad = new Date(añoActual + 1, 11, 25);
+      }
+
+      const diferencia = navidad - hoy;
+      const diasFaltantes = Math.ceil(diferencia / (1000 * 60 * 60 * 24));
+
+      document.getElementById("resultado").innerText = 
+        "Faltan " + diasFaltantes + " días para Navidad :)";
+    }
+
+    window.onload = diasParaNavidad;
+  </script>
+</head>
+<body>
+  <h1>Días que faltan para Navidad</h1>
+  <p id="resultado"></p>
+</body>
+</html>
