@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Días y nombre del mes</title>
+</head>
+<body>
+  <h2>Obtener nombre y número de días de un mes</h2>
+
+  <label for="mes">Mes (1-12):</label>
+  <input type="number" id="mes" min="1" max="12"><br><br>
+
+  <label for="anio">Año:</label>
+  <input type="number" id="anio"><br><br>
+
+  <button onclick="mostrarResultado()">Mostrar resultado</button>
+
+  <h3 id="resultado"></h3>
+
+  <script>
+    // Función que obtiene el nombre del mes a partir del número
+    function obtenerNombreMes(mes) {
+      const nombresMeses = [
+        "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
+        "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
+      ];
+      return nombresMeses[mes - 1];
+    }
+
+    // Función que devuelve el número de días de un mes y año dados
+    function obtenerDiasDelMes(mes, anio) {
+      return new Date(anio, mes, 0).getDate();
+    }
+
+    // Función principal que muestra el resultado en pantalla
+    function mostrarResultado() {
+      const mes = parseInt(document.getElementById("mes").value);
+      const anio = parseInt(document.getElementById("anio").value);
+
+      if (isNaN(mes) || mes < 1 || mes > 12 || isNaN(anio)) {
+        document.getElementById("resultado").innerText = "Por favor, introduce valores válidos.";
+        return;
+      }
+
+      const nombreMes = obtenerNombreMes(mes);
+      const dias = obtenerDiasDelMes(mes, anio);
+
+      document.getElementById("resultado").innerText = 
+        `El mes de ${nombreMes} del año ${anio} tiene ${dias} días.`;
+    }
+  </script>
+</body>
+</html>
