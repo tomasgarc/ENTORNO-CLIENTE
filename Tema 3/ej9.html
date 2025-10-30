@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Capitalizar Palabras</title>
+  <script>
+    function capitalizar_palabras(texto) {
+      return texto
+        .split(' ')
+        .map(palabra => palabra.charAt(0).toUpperCase() + palabra.slice(1).toLowerCase())
+        .join(' ');
+    }
+
+    function mostrarResultado() {
+      let textoOriginal = document.getElementById("texto").value;
+      let resultado = capitalizar_palabras(textoOriginal);
+      document.getElementById("resultado").textContent = resultado;
+    }
+  </script>
+</head>
+<body>
+  <h2>Capitalizar Palabras</h2>
+
+  <p>Introduce una frase:</p>
+  <input type="text" id="texto" value="hola mundo desde javascript">
+  <button onclick="mostrarResultado()">Capitalizar</button>
+
+  <p>Resultado:</p>
+  <p id="resultado"></p>
+</body>
+</html>

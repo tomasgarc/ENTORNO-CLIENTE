@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Insertar Cadena</title>
+  <script>
+    function insert(cadena, insertar = '', posicion = 1) {
+      if (posicion < 1) posicion = 1;
+      if (posicion > cadena.length) posicion = cadena.length + 1;
+      return cadena.slice(0, posicion - 1) + insertar + ' ' + cadena.slice(posicion - 1);
+    }
+
+    function mostrarResultado() {
+      let textoBase = document.getElementById("textoBase").value;
+      let textoInsertar = document.getElementById("textoInsertar").value;
+      let posicion = parseInt(document.getElementById("posicion").value) || 1;
+      
+      let resultado = insert(textoBase, textoInsertar, posicion);
+      document.getElementById("resultado").textContent = resultado;
+    }
+  </script>
+</head>
+<body>
+  <h2>Insertar una cadena dentro de otra</h2>
+
+  <p>Texto base:</p>
+  <input type="text" id="textoBase" size="50">
+
+  <p>Texto a insertar:</p>
+  <input type="text" id="textoInsertar" size="50">
+
+  <p>Posición (opcional, por defecto 1):</p>
+  <input type="number" id="posicion" value="1">
+
+  <br><br>
+  <button onclick="mostrarResultado()">Insertar</button>
+
+  <p><strong>Resultado:</strong></p>
+  <p id="resultado"></p>
+</body>
+</html>

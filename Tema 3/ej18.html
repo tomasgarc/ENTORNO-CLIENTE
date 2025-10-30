@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Contar Subcadena</title>
+  <script>
+    function contarSubcadena(cadena, subcadena) {
+      if (!subcadena) return 0; // Evita buscar cadenas vacías
+      let contador = 0;
+      let posicion = cadena.indexOf(subcadena);
+
+      while (posicion !== -1) {
+        contador++;
+        // Continúa buscando después de la última coincidencia
+        posicion = cadena.indexOf(subcadena, posicion + subcadena.length);
+      }
+
+      return contador;
+    }
+
+    function mostrarResultado() {
+      let texto = document.getElementById("texto").value;
+      let subcadena = document.getElementById("subcadena").value;
+
+      let resultado = contarSubcadena(texto, subcadena);
+      document.getElementById("resultado").textContent =
+        `La subcadena "${subcadena}" aparece ${resultado} veces.`;
+    }
+  </script>
+</head>
+<body>
+  <h2>Contar ocurrencias de una subcadena</h2>
+
+  <p>Texto principal:</p>
+  <input type="text" id="texto" size="40">
+
+  <p>Subcadena a buscar:</p>
+  <input type="text" id="subcadena">
+
+  <br><br>
+  <button onclick="mostrarResultado()">Contar</button>
+
+  <p><strong>Resultado:</strong></p>
+  <p id="resultado"></p>
+</body>
+</html>

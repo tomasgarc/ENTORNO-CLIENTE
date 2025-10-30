@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Extraer caracteres</title>
+</head>
+<body>
+  <h1>Extraer caracteres de una cadena</h1>
+  <form id="formExtraer" autocomplete="off">
+    <label for="cadena">Cadena</label>
+    <input id="cadena" rows="3" ></input>
+
+    <label for="inicio">Posición inicial (0 = inicio)</label>
+    <input id="inicio" type="number" min="0" step="1" value="0">
+
+    <label for="cantidad">Cantidad de caracteres</label>
+    <input id="cantidad" type="number" min="0" step="1" value="4">
+  </form>
+
+  <div>
+    <strong>Resultado:</strong>
+    <pre id="resultado"></pre>
+    <small>Longitud de la cadena: <span id="len"></span></small>
+  </div>
+
+  <script>
+    function extraerCaracteres(cadena, inicio, cantidad) {
+      const i = Math.max(0, Number(inicio) || 0);
+      const n = Math.max(0, Number(cantidad) || 0);
+      return String(cadena).slice(i, i + n);
+    }
+
+    const cadenaEl = document.getElementById('cadena');
+    const inicioEl = document.getElementById('inicio');
+    const cantidadEl = document.getElementById('cantidad');
+    const resultadoEl = document.getElementById('resultado');
+    const lenEl = document.getElementById('len');
+
+    function actualizar() {
+      const str = cadenaEl.value || '';
+      const i = parseInt(inicioEl.value, 10);
+      const n = parseInt(cantidadEl.value, 10);
+      resultadoEl.textContent = extraerCaracteres(str, i, n);
+      lenEl.textContent = str.length;
+    }
+
+    document.getElementById('formExtraer').addEventListener('input', actualizar);
+    cadenaEl.value = 'Cadena';
+    actualizar();
+  </script>
+</body>
+</html>

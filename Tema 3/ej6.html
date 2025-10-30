@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Proteger Email</title>
+  <script>
+    function protege_email(email) {
+      email = email.trim();
+      let partes = email.split("@");
+      let nombre = partes[0];
+      let dominio = partes[1];
+      let nombreProtegido = nombre.substring(0, 3) + '...';
+      return nombreProtegido + '@' + dominio;
+    }
+
+    function mostrarCorreo() {
+      let correoOriginal = document.getElementById("correo").value;
+      let resultado = protege_email(correoOriginal);
+      document.getElementById("resultado").textContent = resultado;
+    }
+  </script>
+</head>
+<body>
+  <h2>Protector de direcciones de correo</h2>
+  
+  <p>Introduce un correo electrónico:</p>
+  <input type="text" id="correo" >
+  <button onclick="mostrarCorreo()">Proteger</button>
+  
+  <p>Correo protegido:</p>
+  <p id="resultado"></p>
+</body>
+</html>

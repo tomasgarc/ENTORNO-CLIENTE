@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Buscar Palabra en una Cadena</title>
+  <script>
+    function palabra_busqueda(cadena, palabra) {
+      if (!palabra) return `'${palabra}' se encontró 0 veces.`;
+
+      // Usamos expresión regular para buscar todas las coincidencias
+      let regex = new RegExp('\\b' + palabra + '\\b', 'gi');
+      let coincidencias = cadena.match(regex);
+      let cantidad = coincidencias ? coincidencias.length : 0;
+
+      return `'${palabra}' se encontró ${cantidad} veces.`;
+    }
+
+    function mostrarResultado() {
+      let texto = document.getElementById("texto").value;
+      let palabra = document.getElementById("palabra").value;
+
+      let resultado = palabra_busqueda(texto, palabra);
+      document.getElementById("resultado").textContent = resultado;
+    }
+  </script>
+</head>
+<body>
+  <h2>Buscar palabra dentro de una cadena</h2>
+
+  <p>Texto:</p>
+  <input type="text" id="texto" size="40">
+
+  <p>Palabra a buscar:</p>
+  <input type="text" id="palabra">
+
+  <br><br>
+  <button onclick="mostrarResultado()">Buscar</button>
+
+  <p><strong>Resultado:</strong></p>
+  <p id="resultado"></p>
+</body>
+</html>
