@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Unir elementos de una matriz</title>
+</head>
+<body>
+  <h2>Unir todos los elementos de una matriz en una cadena</h2>
+
+  <label for="numeros">Introduce los elementos separados por comas:</label><br>
+  <input type="text" id="numeros">
+  <button onclick="unirElementos()">Unir</button>
+
+  <p id="resultado"></p>
+
+  <script>
+    function unirElementos() {
+      // Obtener la cadena del input
+      const entrada = document.getElementById("numeros").value;
+
+      // Dividir en un arreglo (por comas)
+      const arreglo = entrada.split(",").map(e => e.trim());
+
+      // Unir los elementos del arreglo en una sola cadena
+      const cadenaUnida = arreglo.join(" "); // Puedes usar " ", "-", "," o lo que desees
+
+      // Mostrar resultado
+      document.getElementById("resultado").innerHTML = 
+        `La cadena resultante es: <strong>${cadenaUnida}</strong>`;
+    }
+  </script>
+</body>
+</html>

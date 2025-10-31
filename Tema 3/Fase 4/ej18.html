@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Producto de una matriz</title>
+</head>
+<body>
+  <h2>Calcular el producto de una matriz de enteros</h2>
+
+  <p>Introduce los números separados por comas:</p>
+  <input type="text" id="numeros">
+  <button onclick="calcularSuma()">Calcular producto</button>
+
+  <p id="resultado"></p>
+
+  <script>
+    function calcularSuma() {
+      var texto = document.getElementById("numeros").value;
+      if (texto.trim() === "") {
+        document.getElementById("resultado").innerText = "Por favor, introduce al menos un número.";
+        return;
+      }
+
+      var array = texto.split(",").map(function(num) {
+        return parseInt(num.trim());
+      });
+
+      var producto = 1;
+      for (var i = 0; i < array.length; i++) {
+        if (!isNaN(array[i])) {
+          producto *= array[i];
+        }
+      }
+
+      document.getElementById("resultado").innerText = "El resultado es: " + producto;
+    }
+  </script>
+</body>
+</html>

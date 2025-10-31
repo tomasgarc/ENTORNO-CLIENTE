@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Elemento más frecuente de una matriz</title>
+</head>
+<body>
+  <h2>Encontrar el elemento más frecuente de una matriz</h2>
+
+  <label for="elementos">Introduce los elementos separados por comas:</label><br>
+  <input type="text" id="elementos">
+  <button onclick="encontrarMasFrecuente()">Calcular</button>
+
+  <p id="resultado"></p>
+
+  <script>
+    function encontrarMasFrecuente() {
+      const entrada = document.getElementById("elementos").value;
+
+      // Convertir a un arreglo
+      const arreglo = entrada.split(",").map(e => e.trim());
+
+      if (arreglo.length === 0 || entrada === "") {
+        document.getElementById("resultado").innerHTML = "Por favor, introduce algunos elementos.";
+        return;
+      }
+
+      // Crear un objeto para contar las repeticiones
+      const conteo = {};
+      arreglo.forEach(el => {
+        conteo[el] = (conteo[el] || 0) + 1;
+      });
+
+      // Encontrar el elemento más frecuente
+      let masFrecuente = arreglo[0];
+      let maxRepeticiones = conteo[masFrecuente];
+
+      for (let elemento in conteo) {
+        if (conteo[elemento] > maxRepeticiones) {
+          masFrecuente = elemento;
+          maxRepeticiones = conteo[elemento];
+        }
+      }
+
+      // Mostrar el resultado
+      document.getElementById("resultado").innerHTML =
+        `El elemento más frecuente es: <strong>${masFrecuente}</strong> (aparece ${maxRepeticiones} veces)`;
+    }
+  </script>
+</body>
+</html>

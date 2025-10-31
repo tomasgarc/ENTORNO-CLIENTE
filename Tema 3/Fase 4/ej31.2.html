@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Eliminar elemento específico de una matriz</title>
+</head>
+<body>
+  <h2>Eliminar un elemento específico de una matriz</h2>
+
+  <label for="arreglo">Introduce los elementos separados por comas:</label><br>
+  <input type="text" id="arreglo"><br><br>
+
+  <label for="elemento">Elemento a eliminar:</label><br>
+  <input type="text" id="elemento"><br><br>
+
+  <button onclick="removerElemento()">Eliminar</button>
+
+  <p id="resultado"></p>
+
+  <script>
+    // Función que elimina un elemento específico de una matriz
+    function remover(arr, elemento) {
+      // Filtra los elementos diferentes al que queremos eliminar
+      return arr.filter(el => el != elemento);
+    }
+
+    // Función para manejar la entrada del usuario
+    function removerElemento() {
+      const entrada = document.getElementById("arreglo").value;
+      const valorAEliminar = document.getElementById("elemento").value;
+
+      if (!entrada || valorAEliminar === "") {
+        document.getElementById("resultado").innerHTML = "Por favor, introduce una matriz y el elemento a eliminar.";
+        return;
+      }
+
+      // Convertir la cadena en un arreglo
+      const arreglo = entrada.split(",").map(e => e.trim());
+
+      // Eliminar el elemento indicado
+      const nuevoArreglo = remover(arreglo, valorAEliminar);
+
+      // Mostrar el resultado
+      document.getElementById("resultado").innerHTML = 
+        `Matriz resultante: [${nuevoArreglo.join(", ")}]`;
+    }
+  </script>
+</body>
+</html>
