@@ -1,0 +1,78 @@
+/* Reset básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+}
+
+/* Body y fondo negro */
+body {
+    background-color: #000;
+    color: #f0f0f0;
+    line-height: 1.6;
+}
+
+/* Header */
+header {
+    text-align: center;
+    padding: 2rem 1rem;
+    background: rgba(50, 50, 50, 0.3);
+    backdrop-filter: blur(10px);
+    margin-bottom: 2rem;
+}
+
+header h1 {
+    margin-bottom: 1rem;
+}
+
+/* Secciones */
+.apartado {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 2rem;
+    border-radius: 15px;
+    background: rgba(17, 17, 17, 0.8); /* gris oscuro semitransparente */
+    backdrop-filter: blur(10px);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.5);
+    text-align: center;
+}
+
+.apartado h2 {
+    margin-bottom: 1rem;
+    color: #fff;
+}
+
+/* Botones */
+.btn {
+    display: block; /* hace que ocupe toda la línea */
+    width: 300px;    /* opcional, para que todos tengan el mismo ancho */
+    margin: 0.5rem auto; /* centrado horizontal con espacio entre ellos */
+    padding: 1rem 2rem;
+    margin-top: 1rem;
+    text-decoration: none;
+    color: #ffffff;
+    background: linear-gradient(45deg, #bd58ca, #f1d13f);
+    border-radius: 10px;
+    transition: transform 0.3s, opacity 0.3s;
+}
+
+.btn:hover {
+    transform: translateX(5px);
+    background: #dbab52;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 2rem 1rem;
+    font-size: 0.9rem;
+    color: #aaa;
+}
+
+h2 {
+    background: linear-gradient(90deg, #ff63ff, #fffb00); /* gradiente de izquierda a derecha */
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    transition: transform 0.3s, opacity 0.3s;
+}
