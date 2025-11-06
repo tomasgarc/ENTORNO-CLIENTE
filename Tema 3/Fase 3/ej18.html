@@ -5,13 +5,12 @@
   <title>Contar Subcadena</title>
   <script>
     function contarSubcadena(cadena, subcadena) {
-      if (!subcadena) return 0; // Evita buscar cadenas vacías
+      if (!subcadena) return 0;
       let contador = 0;
       let posicion = cadena.indexOf(subcadena);
 
       while (posicion !== -1) {
         contador++;
-        // Continúa buscando después de la última coincidencia
         posicion = cadena.indexOf(subcadena, posicion + subcadena.length);
       }
 
