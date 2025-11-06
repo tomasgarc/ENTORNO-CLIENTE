@@ -15,22 +15,17 @@
 
   <script>
     function calcularMaximo() {
-      // Obtener los valores del input
       const entrada = document.getElementById("numeros").value;
 
-      // Convertir la cadena a un arreglo de números
       const arreglo = entrada.split(",").map(num => parseFloat(num.trim()));
 
-      // Verificar que todos los valores sean números válidos
       if (arreglo.some(isNaN)) {
         document.getElementById("resultado").innerHTML = "Por favor, introduce solo números válidos separados por comas.";
         return;
       }
 
-      // Encontrar el valor más alto
       const maximo = Math.max(...arreglo);
 
-      // Mostrar el resultado
       document.getElementById("resultado").innerHTML = 
         `El valor más alto es: <strong>${maximo}</strong>`;
     }

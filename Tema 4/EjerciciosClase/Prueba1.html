@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Ejemplo de mostrarMensaje</title>
+<script>
+function mostrarMensaje(evento){
+    if(evento.type === "keyup"){
+        alert(evento.keyCode);
+    }
+    else if(evento.type === "click"){
+        alert(evento.clientX + " " + evento.clientY);
+    }
+}
+window.onload = function() {
+    document.getElementById("miObjeto").onclick = mostrarMensaje;
+    document.onkeyup = mostrarMensaje;
+};
+</script>
+</head>
+<body>
+    <h1>Función mostrar mensaje</h1>
+    <button id="miObjeto">Mostrar</button>
+    <p>Pulsa el botón o cualquier tecla para ver el resultado</p>
+</body>
+</html>
