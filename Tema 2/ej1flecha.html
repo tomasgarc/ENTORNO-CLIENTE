@@ -9,19 +9,14 @@
     <p id="resultado">Esperando tu número...</p>
 
     <script>
-        // Función flecha para generar número aleatorio entre 1 y max
         const numeroAleatorio = (max) => Math.floor(Math.random() * max) + 1;
 
-        // Pedir número al usuario
         const input = prompt("Ingresa un número entero mayor que 0:");
 
-        // Convertir a número
         const numero = parseInt(input);
 
-        // Obtener el elemento <p> para mostrar el resultado
         const resultadoElemento = document.getElementById("resultado");
 
-        // Verificar si el número es válido
         if (!isNaN(numero) && numero > 0) {
             const aleatorio = numeroAleatorio(numero);
             resultadoElemento.textContent = `Número aleatorio entre 1 y ${numero}: ${aleatorio}`;

@@ -7,7 +7,6 @@
     function palabra_busqueda(cadena, palabra) {
       if (!palabra) return `'${palabra}' se encontró 0 veces.`;
 
-      // Usamos expresión regular para buscar todas las coincidencias
       let regex = new RegExp('\\b' + palabra + '\\b', 'gi');
       let coincidencias = cadena.match(regex);
       let cantidad = coincidencias ? coincidencias.length : 0;

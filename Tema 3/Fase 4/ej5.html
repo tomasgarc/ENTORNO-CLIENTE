@@ -15,16 +15,11 @@
 
   <script>
     function unirElementos() {
-      // Obtener la cadena del input
       const entrada = document.getElementById("numeros").value;
 
-      // Dividir en un arreglo (por comas)
       const arreglo = entrada.split(",").map(e => e.trim());
 
-      // Unir los elementos del arreglo en una sola cadena
-      const cadenaUnida = arreglo.join(" "); // Puedes usar " ", "-", "," o lo que desees
-
-      // Mostrar resultado
+      const cadenaUnida = arreglo.join(" ");
       document.getElementById("resultado").innerHTML = 
         `La cadena resultante es: <strong>${cadenaUnida}</strong>`;
     }

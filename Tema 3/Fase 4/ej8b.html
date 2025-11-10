@@ -17,7 +17,6 @@
     function encontrarMasFrecuente() {
       const entrada = document.getElementById("elementos").value;
 
-      // Convertir a un arreglo
       const arreglo = entrada.split(",").map(e => e.trim());
 
       if (arreglo.length === 0 || entrada === "") {
@@ -25,13 +24,11 @@
         return;
       }
 
-      // Crear un objeto para contar las repeticiones
       const conteo = {};
       arreglo.forEach(el => {
         conteo[el] = (conteo[el] || 0) + 1;
       });
 
-      // Encontrar el elemento más frecuente
       let masFrecuente = arreglo[0];
       let maxRepeticiones = conteo[masFrecuente];
 
@@ -42,7 +39,6 @@
         }
       }
 
-      // Mostrar el resultado
       document.getElementById("resultado").innerHTML =
         `El elemento más frecuente es: <strong>${masFrecuente}</strong> (aparece ${maxRepeticiones} veces)`;
     }

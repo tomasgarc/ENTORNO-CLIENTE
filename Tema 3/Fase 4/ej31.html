@@ -21,18 +21,16 @@
   <p id="resultado"></p>
 
   <script>
-    // Función para obtener el número más alto de tres
+    
     function numeroMasAlto(a, b, c) {
       return Math.max(a, b, c);
     }
 
-    // Función para manejar la interacción con el usuario
     function encontrarMayor() {
       const num1 = parseFloat(document.getElementById("num1").value);
       const num2 = parseFloat(document.getElementById("num2").value);
       const num3 = parseFloat(document.getElementById("num3").value);
 
-      // Validar que los tres valores sean números
       if (isNaN(num1) || isNaN(num2) || isNaN(num3)) {
         document.getElementById("resultado").innerHTML = "Por favor, ingresa los tres números.";
         return;
