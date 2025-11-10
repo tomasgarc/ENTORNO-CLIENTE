@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Detección de botón del ratón</title>
+</head>
+<body>
+
+  <h2>Pulsa en cualquier parte de la pantalla</h2>
+  <p id="mensaje"></p>
+
+  <script>
+    document.addEventListener("mousedown", function(e) {
+      const mensaje = document.getElementById("mensaje");
+      if (e.button === 0) {
+        mensaje.textContent = "Has pulsado el botón izquierdo";
+      } else if (e.button === 2) {
+        mensaje.textContent = "Has pulsado el botón derecho";
+      } else {
+        mensaje.textContent = "Ni uno ni otro guapo";
+      }
+    });
+
+    document.addEventListener("contextmenu", function(e) {
+      e.preventDefault();
+    });
+  </script>
+
+</body>
+</html>

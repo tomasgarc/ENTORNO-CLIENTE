@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Mostrar tecla pulsada</title>
+</head>
+<body>
+
+  <h2>Pulsa cualquier tecla</h2>
+  <p id="mensaje"></p>
+
+  <script>
+    const mensaje = document.getElementById("mensaje");
+
+    document.addEventListener("keydown", function(e) {
+      let texto = "Tecla pulsada: " + e.key;
+      mensaje.textContent = texto;
+    });
+  </script>
+
+</body>
+</html>

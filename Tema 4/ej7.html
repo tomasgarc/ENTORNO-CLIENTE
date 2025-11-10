@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Mover caja con flechas</title>
+</head>
+<body>
+
+  <div id="caja" style="width:100px;height:100px;background:rgb(137, 206, 154);position:absolute;top:100px;left:100px;"></div>
+
+  <script>
+    const caja = document.getElementById("caja");
+    let x = 100;
+    let y = 100;
+    const paso = 10;
+
+    document.addEventListener("keydown", function(e) {
+      switch (e.key) {
+        case "ArrowUp":
+        case "8":
+          y -= paso;
+          break;
+        case "ArrowDown":
+        case "2":
+          y += paso;
+          break;
+        case "ArrowLeft":
+        case "4":
+          x -= paso;
+          break;
+        case "ArrowRight":
+        case "6":
+          x += paso;
+          break;
+        case "7":
+          x -= paso;
+          y -= paso;
+          break;
+        case "9":
+          x += paso;
+          y -= paso;
+          break;
+        case "1":
+          x -= paso;
+          y += paso;
+          break;
+        case "3":
+          x += paso;
+          y += paso;
+          break;
+      }
+      if (x < 0) x = 0;
+      if (y < 0) y = 0;
+      if (x > window.innerWidth - 100) x = window.innerWidth - 100;
+      if (y > window.innerHeight - 100) y = window.innerHeight - 100;
+      caja.style.left = x + "px";
+      caja.style.top = y + "px";
+    });
+  </script>
+
+</body>
+</html>

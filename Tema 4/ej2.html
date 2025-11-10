@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Eventos de ratón y teclado</title>
+</head>
+<body>
+
+  <h2>Eventos: ratón y teclado</h2>
+  <div id="cuadro" style="width:300px; height:150px; border:1px solid black; text-align:center; line-height:150px;">
+    Cuadro de mensaje
+  </div>
+
+  <script>
+    const cuadro = document.getElementById("cuadro");
+
+    document.addEventListener("mousedown", function() {
+      cuadro.style.backgroundColor = "#FFFF00"; 
+    });
+
+    document.addEventListener("keydown", function() {
+      cuadro.style.backgroundColor = "#CCE6FF"; 
+    });
+
+    document.addEventListener("mousemove", function() {
+      cuadro.style.backgroundColor = "white";
+    });
+  </script>
+
+</body>
+</html>

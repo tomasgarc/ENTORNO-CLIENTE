@@ -8,32 +8,37 @@
 </head>
 <body>
     <header>
-        <h1>Tomás García Chaves // Desarrollo Web en Entorno Cliente</h1>
+        <h1>Tomás García Chaves // Desarrollo Web en Entorno Cliente // 2025/26</h1>
     </header>
 
     <main>
         <section id="tema1" class="apartado">
-            <h2>/ Tema 1 /</h2>
+            <h2>/ TEMA 1 /</h2>
+            <div class = "ejercicios">
             <a href="Tema 1/ej1.html" target="_blank" class="btn">Ejercicio 1</a>
             <a href="Tema 1/ej2.html" target="_blank" class="btn">Ejercicio 2</a>
             <a href="Tema 1/ej3.html" target="_blank" class="btn">Ejercicio 3</a>
             <a href="Tema 1/ej4.html" target="_blank" class="btn">Ejercicio 4</a>
             <a href="Tema 1/ej5.html" target="_blank" class="btn">Ejercicio 5</a>
             <a href="Tema 1/pruebamusica.html" target="_blank" class="btn">¿Está sonando música?</a>
+            </div>
         </section>
 
         <section id="tema2" class="apartado">
-            <h2>/ Tema 2 /</h2>
+            <h2>/ TEMA 2 /</h2>
+            <div class = "ejercicios">
             <a href="Tema 2/ej1flecha.html" target="_blank" class="btn">Ejercicio 1</a>
             <a href="Tema 2/ej2flecha.html" target="_blank" class="btn">Ejercicio 2</a>
             <a href="Tema 2/ej3flecha.html" target="_blank" class="btn">Ejercicio 3</a>
             <a href="Tema 2/ej8.html" target="_blank" class="btn">Ejercicio 8</a>
             <a href="Tema 2/ej9.html" target="_blank" class="btn">Ejercicio 9</a>
             <a href="Tema 2/ej11.html" target="_blank" class="btn">Ejercicio 11</a>
+            </div>
         </section>
 
         <section id="tema3" class="apartado">
-            <h2>/ Tema 3 /</h2>
+            <h2>/ TEMA 3 /</h2>
+            <div class = "ejercicios">
             <h3>- Fase 3 -</h3>
             <a href="Tema 3/Fase 3/ej4.html" target="_blank" class="btn">Ejercicio 4</a>
             <a href="Tema 3/Fase 3/ej6.html" target="_blank" class="btn">Ejercicio 6</a>
@@ -51,8 +56,31 @@
             <a href="Tema 3/Fase 4/ej18.html" target="_blank" class="btn">Ejercicio 18</a>
             <a href="Tema 3/Fase 4/ej31.html" target="_blank" class="btn">Ejercicio 31</a>
             <a href="Tema 3/Fase 4/ej31.2.html" target="_blank" class="btn">Ejercicio 31.2</a>
+            </div>
+        </section>
+
+        <section id="tema4" class="apartado">
+            <h2>/ TEMA 4 /</h2>
+            <div class = "ejercicios">
+            <a href="Tema 4/ej1.html" target="_blank" class="btn">Ejercicio 1</a>
+            <a href="Tema 4/ej2.html" target="_blank" class="btn">Ejercicio 2</a>
+            <a href="Tema 4/ej3.html" target="_blank" class="btn">Ejercicio 3</a>
+            <a href="Tema 4/ej4.html" target="_blank" class="btn">Ejercicio 4</a>
+            <a href="Tema 4/ej5.html" target="_blank" class="btn">Ejercicio 5</a>
+            <a href="Tema 4/ej6.html" target="_blank" class="btn">Ejercicio 6</a>
+            <a href="Tema 4/ej7.html" target="_blank" class="btn">Ejercicio 7</a>
+            </div>
         </section>
     </main>
+<script>
+  const temas = document.querySelectorAll(".apartado h2");
 
+temas.forEach(h2 => {
+    h2.addEventListener("click", () => {
+        const ejercicios = h2.nextElementSibling;
+        ejercicios.classList.toggle("open");
+    });
+});
+</script>
 </body>
 </html>

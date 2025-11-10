@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Deshabilitar botón derecho</title>
+</head>
+<body>
+  <h2>Click derecho deshabilitado</h2>
+
+  <script>
+    document.addEventListener('contextmenu', function(e){ e.preventDefault(); }, false);
+    document.addEventListener('keydown', function(e){
+      if ((e.shiftKey && e.key === 'F10') || e.key === 'ContextMenu' || e.key === 'Apps' || e.keyCode === 93) e.preventDefault();
+    }, false);
+  </script>
+</body>
+</html>

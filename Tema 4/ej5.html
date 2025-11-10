@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Mostrar URL de imagen al pasar el ratón</title>
+</head>
+<body>
+    <style>
+        img {
+            width: 300px;
+        }
+    </style>
+
+    <h2>Pasa el ratón sobre las imágenes</h2>
+    <img src="img/apple.jpg" alt="Imagen 1">
+    <img src="img/bananas.jpg" alt="Imagen 2">
+    <img src="img/cherries.jpg" alt="Imagen 3">
+
+    <p id="mensaje"></p>
+
+    <script>
+        const mensaje = document.getElementById("mensaje");
+        const imagenes = document.querySelectorAll("img");
+
+        imagenes.forEach(function(img) {
+            img.addEventListener("mouseover", function() {
+            mensaje.textContent = "URL de la imagen: " + img.src;
+        });
+        img.addEventListener("mouseout", function() {
+        mensaje.textContent = "";
+        });
+    });
+    </script>
+
+</body>
+</html>

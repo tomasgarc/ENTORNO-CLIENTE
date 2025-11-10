@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Cambiar imagen al mantener clic</title>
+</head>
+<body>
+
+  <h2>Haz clic y mantenlo sobre la imagen</h2>
+  <img id="imagen" src="img/apple.jpg" alt="Imagen 1">
+
+  <script>
+    const imagen = document.getElementById('imagen');
+
+    const imagenNormal = "img/apple.jpg";
+    const imagenPresionada = "img/bananas.jpg";
+
+    imagen.addEventListener("mousedown", function() {
+      imagen.src = imagenPresionada;
+    });
+
+    imagen.addEventListener("mouseup", function() {
+      imagen.src = imagenNormal;
+    });
+
+    imagen.addEventListener("mouseleave", function() {
+      imagen.src = imagenNormal;
+    });
+
+    imagen.addEventListener("touchstart", function() {
+      imagen.src = imagenPresionada;
+    });
+
+    imagen.addEventListener("touchend", function() {
+      imagen.src = imagenNormal;
+    });
+  </script>
+
+</body>
+</html>
