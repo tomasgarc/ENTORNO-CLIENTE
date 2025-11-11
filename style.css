@@ -68,6 +68,6 @@ h2 {
 }
 
     .apartado a { margin: 1rem auto; padding: 0.5rem 2rem; }
-    .apartado .ejercicios { max-height: 0; overflow: hidden; transition: max-height 0.5s ease; margin-left: 1rem; }
+    .apartado .ejercicios { max-height: 0; overflow: hidden; transition: max-height 0.5s ease;}
     .apartado h2 { cursor: pointer; user-select: none; padding: 0.5rem; border-radius: 5px; }
     .apartado .ejercicios.open { max-height: 1000px; }
