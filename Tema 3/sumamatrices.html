@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Suma de dos matrices</h1>
+    <p>Introduce las matrices:</p>
+
+    <h3>Matriz 1</h3>
+    <textarea id = "matriz1" rows = "3" cols = "30"></textarea>
+
+    <h3>Matriz 2</h3>
+    <textarea id = "matriz2" rows = "3" cols = "30"></textarea><br>
+
+    <button onclick = "sumarMatrices()">Calcular</button>
+    
+    <h3>RESULTADO</h3>
+    <pre id = "resultado"></pre>
+    <script>
+        function textoAMatriz(texto) {
+            return texto.trim().split('\n').map(fila => fila.split(',').map(Number));
+        }
+
+        function sumarMatrices() {
+            const matriz1 = textoAMatriz(document.getElementById('matriz1').value);
+            const matriz2 = textoAMatriz(document.getElementById('matriz2').value);
+
+            if (matriz1.length !== matriz2.length || matriz1[0].length !== matriz2[0].length) {
+                document.getElementById('resultado').textContent = "Error: las matrices deben tener las mismas dimensiones.";
+                return;
+            }
+
+            const suma = matriz1.map((fila, i) =>
+                fila.map((valor, j) => valor + matriz2[i][j])
+            );
+
+            document.getElementById('resultado').textContent = suma.map(fila => fila.join(', ')).join('\n');
+        }
+    </script>
+</body>
+</html>

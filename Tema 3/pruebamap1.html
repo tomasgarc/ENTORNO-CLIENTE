@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contar palabras</title>
+</head>
+<body>
+  <h1>Contador de palabras</h1>
+  <pre id="resultado"></pre>
+
+  <script>
+    const frase = 'hola mundo hola javascript mundo javascript javascript';
+    const palabras = frase.split(' ');
+    const contador = new Map();
+
+    palabras.forEach((palabra) => {
+      if (contador.has(palabra)) {
+        contador.set(palabra, contador.get(palabra) + 1);
+      } else {
+        contador.set(palabra, 1);
+      }
+    });
+
+    const resultado = document.getElementById('resultado');
+    contador.forEach((valor, clave) => {
+      resultado.textContent += `${clave}: ${valor}\n`;
+    });
+  </script>
+</body>
+</html>

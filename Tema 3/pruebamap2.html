@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Analizador de Texto</title>
+</head>
+<body>
+  <h2>Analizador de Texto</h2>
+  <textarea id="texto" rows="5" cols="50" placeholder="Escribe un texto aquí..."></textarea><br>
+  <button onclick="mostrarAnalisis()">Analizar texto</button>
+
+  <h3>Resultado:</h3>
+  <pre id="resultado"></pre>
+
+  <script>
+    function analizarTexto(texto) {
+      // Convertir a minúsculas y eliminar signos de puntuación
+      const limpio = texto
+        .toLowerCase()
+        .replace(/[.,;:!?]/g, '');
+
+      // Dividir el texto en palabras
+      const palabras = limpio.split(/\s+/).filter(p => p.length > 0);
+
+      // Crear el Map
+      const conteo = new Map();
+
+      palabras.forEach(palabra => {
+        conteo.set(palabra, (conteo.get(palabra) || 0) + 1);
+      });
+
+      return conteo;
+    }
+
+    function mostrarAnalisis() {
+      const texto = document.getElementById('texto').value;
+      const resultadoMap = analizarTexto(texto);
+
+      let salida = '';
+      resultadoMap.forEach((valor, clave) => {
+        salida += `${clave}: ${valor}\n`;
+      });
+
+      document.getElementById('resultado').textContent = salida || "No se encontraron palabras.";
+    }
+  </script>
+</body>
+</html>
