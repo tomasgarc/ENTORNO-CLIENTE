@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Ejercicio 1</h1>
+    <h3>Dime un número</h3>
+    <input type = "number" id = "num"><br><br>
+    <button onclick = "dibujar()">Dibujar</button><br><br>
+
+    <textarea id = "result" rows = "15"></textarea>
+
+    <script>
+        function dibujar(number) {
+            const resultElement = document.getElementById('result');
+            resultElement.textContent = '';
+            const num = parseInt(document.getElementById('num').value);
+
+            if(isNaN(num) || num <= 0) {
+                resultElement.textContent = "Por favor introduce un número válido."
+                return;
+            } else {
+
+                for(var i = 0; i < num; i++) {
+                    var res = num - i;
+                    for(var j = 0; j < res; j++) {
+                        resultElement.textContent += `*`;
+                    }
+                    resultElement.textContent += `\n`;
+                }
+
+            }
+
+        }
+    </script>
+</body>
+</html>

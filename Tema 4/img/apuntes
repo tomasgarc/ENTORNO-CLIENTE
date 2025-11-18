@@ -1,0 +1,308 @@
+//🟨 APUNTES DE JAVASCRIPT
+🔹 Manejo y Sintaxis del Lenguaje
+🔹 Funciones Predefinidas
+🟦 1. Sintaxis básica de JavaScript
+📄 Estructura general
+// Comentario de una línea
+/*
+  Comentario de varias líneas
+*/
+
+let nombre = "Juan"; // Declaración de variable
+const PI = 3.1416;   // Constante
+var edad = 25;       // (forma antigua, no recomendada)
+
+🔤 Tipos de datos
+
+Primitivos: string, number, boolean, undefined, null, symbol, bigint
+
+Compuestos: object, array, function
+
+let texto = "Hola";
+let numero = 42;
+let booleano = true;
+let vacio = null;
+let indefinido;
+let objeto = {nombre: "Ana", edad: 20};
+let lista = [1, 2, 3];
+
+➕ Operadores
+
+Aritméticos: + - * / % **
+
+Asignación: = += -= *= /=
+
+Comparación: == != === !== > < >= <=
+
+Lógicos: && || !
+
+Concatenación: "Hola " + nombre
+
+Ternario:
+
+let mensaje = (edad >= 18) ? "Adulto" : "Menor";
+
+🟩 2. Estructuras de control
+🔁 Condicionales
+if (condicion) {
+  // código
+} else if (otraCondicion) {
+  // código
+} else {
+  // código
+}
+
+switch (opcion) {
+  case 1:
+    // ...
+    break;
+  default:
+    // ...
+}
+
+🔄 Bucles
+for (let i = 0; i < 5; i++) {
+  console.log(i);
+}
+
+while (condicion) {
+  // ...
+}
+
+do {
+  // ...
+} while (condicion);
+
+for (let elemento of lista) {
+  console.log(elemento);
+}
+
+for (let clave in objeto) {
+  console.log(clave + ": " + objeto[clave]);
+}
+
+🟨 3. Funciones
+✏️ Definición
+function saludar(nombre) {
+  return "Hola " + nombre;
+}
+console.log(saludar("Lucía"));
+
+➡️ Funciones anónimas y flecha
+const sumar = function(a, b) {
+  return a + b;
+};
+
+const restar = (a, b) => a - b;
+
+🔁 Parámetros por defecto
+function multiplicar(a, b = 1) {
+  return a * b;
+}
+
+🟧 4. Objetos y Arrays
+🧩 Objetos
+let persona = {
+  nombre: "Luis",
+  edad: 30,
+  saludar: function() {
+    console.log("Hola, soy " + this.nombre);
+  }
+};
+
+persona.saludar();
+
+📚 Arrays
+let frutas = ["manzana", "pera", "uva"];
+console.log(frutas[0]);
+frutas.push("plátano"); // añadir
+frutas.pop();           // eliminar último
+
+🟪 5. Funciones predefinidas de JavaScript
+🔠 Cadenas (String)
+let texto = "Hola Mundo";
+texto.length;           // 10
+texto.toUpperCase();    // "HOLA MUNDO"
+texto.toLowerCase();    // "hola mundo"
+texto.includes("Mun");  // true
+texto.indexOf("o");     // 1
+texto.slice(0, 4);      // "Hola"
+texto.replace("Mundo", "Amigo"); // "Hola Amigo"
+
+🔢 Números y Math
+let n = 3.7;
+Math.round(n);    // 4
+Math.floor(n);    // 3
+Math.ceil(n);     // 4
+Math.random();    // número entre 0 y 1
+Math.max(3,9,2);  // 9
+Math.min(3,9,2);  // 2
+Math.pow(2,3);    // 8
+Math.sqrt(16);    // 4
+
+📆 Fechas (Date)
+let hoy = new Date();
+hoy.getFullYear();       // año actual
+hoy.getMonth();          // mes (0-11)
+hoy.getDate();           // día del mes
+hoy.toLocaleDateString(); // formato legible
+
+📋 Arrays
+let nums = [1, 2, 3, 4, 5];
+
+nums.length;            // 5
+nums.join("-");         // "1-2-3-4-5"
+nums.concat([6,7]);     // une arrays
+nums.reverse();         // invierte orden
+nums.sort();            // ordena
+nums.map(x => x * 2);   // crea nuevo array
+nums.filter(x => x > 2); // [3,4,5]
+nums.reduce((a,b) => a + b); // suma total
+
+🌐 Funciones globales
+parseInt("123");     // 123
+parseFloat("12.5");  // 12.5
+isNaN("hola");       // true
+Number("45");        // 45
+String(45);          // "45"
+typeof variable;     // tipo de dato
+alert("Hola");       // mensaje en pantalla
+console.log("ok");   // imprime en consola
+
+
+✅ Resumen rápido:
+
+Usa let y const en lugar de var.
+
+Usa === para comparar valores (comparación estricta).
+
+Las funciones flecha son más cortas y no tienen su propio this.
+
+JavaScript tiene muchas funciones integradas en Math, String, Array, Date y funciones globales.
+
+🟦 APUNTES DE JAVASCRIPT: EL MÉTODO map()
+🔹 ¿Qué es map()?
+
+El método map() se utiliza con arrays para crear un nuevo array aplicando una función a cada elemento del array original.
+👉 No modifica el array original, sino que devuelve uno nuevo.
+
+🔹 Sintaxis
+array.map(function(elemento, indice, arrayOriginal) {
+  // Código que devuelve el nuevo valor
+});
+
+
+O con función flecha (más común):
+
+array.map(elemento => nuevoValor);
+
+Parámetros:
+
+elemento: el valor actual del array.
+
+indice (opcional): la posición del elemento.
+
+arrayOriginal (opcional): el array sobre el que se llama map().
+
+🔹 Ejemplo básico
+let numeros = [1, 2, 3, 4, 5];
+
+let cuadrados = numeros.map(num => num * num);
+
+console.log(cuadrados); // [1, 4, 9, 16, 25]
+
+
+📌 El array numeros no cambia.
+📌 map() devuelve un nuevo array con los resultados.
+
+🔹 Ejemplo con cadenas
+let nombres = ["ana", "luis", "maria"];
+
+let nombresMayus = nombres.map(nombre => nombre.toUpperCase());
+
+console.log(nombresMayus); // ["ANA", "LUIS", "MARIA"]
+
+🔹 Ejemplo con objetos
+let personas = [
+  {nombre: "Ana", edad: 20},
+  {nombre: "Luis", edad: 25},
+  {nombre: "Marta", edad: 30}
+];
+
+let nombres = personas.map(p => p.nombre);
+
+console.log(nombres); // ["Ana", "Luis", "Marta"]
+
+
+También puedes transformar objetos:
+
+let edadesMasUno = personas.map(p => ({
+  nombre: p.nombre,
+  edad: p.edad + 1
+}));
+
+console.log(edadesMasUno);
+// [
+//   {nombre: "Ana", edad: 21},
+//   {nombre: "Luis", edad: 26},
+//   {nombre: "Marta", edad: 31}
+// ]
+
+🔹 Ejemplo con el índice
+let letras = ["a", "b", "c"];
+
+let conPosicion = letras.map((letra, i) => `${i + 1}: ${letra}`);
+
+console.log(conPosicion); // ["1: a", "2: b", "3: c"]
+
+🔹 Ejemplo anidado
+
+Puedes usar map() dentro de otro map():
+
+let matriz = [[1, 2], [3, 4], [5, 6]];
+
+let dobles = matriz.map(fila => fila.map(n => n * 2));
+
+console.log(dobles); // [[2, 4], [6, 8], [10, 12]]
+
+🔹 Diferencias entre map() y otros métodos
+Método	Devuelve nuevo array	Modifica el original	Propósito
+map()	✅ Sí	❌ No	Transformar valores
+forEach()	❌ No	❌ No	Recorrer elementos
+filter()	✅ Sí	❌ No	Filtrar elementos
+reduce()	✅ Sí	❌ No	Reducir a un solo valor
+🔹 Buenas prácticas
+
+✅ Usa map() solo cuando necesites transformar datos.
+❌ No lo uses si no devuelves un valor (en ese caso, usa forEach()).
+✅ Devuelve siempre algo en la función de map().
+
+🔹 Ejemplo completo
+let productos = [
+  {nombre: "Camiseta", precio: 15},
+  {nombre: "Pantalón", precio: 30},
+  {nombre: "Zapatos", precio: 50}
+];
+
+let preciosConIVA = productos.map(p => ({
+  nombre: p.nombre,
+  precio: p.precio * 1.21
+}));
+
+console.log(preciosConIVA);
+// [
+//   {nombre: "Camiseta", precio: 18.15},
+//   {nombre: "Pantalón", precio: 36.3},
+//   {nombre: "Zapatos", precio: 60.5}
+// ]
+
+
+✅ Resumen rápido:
+
+map() recorre un array y devuelve otro nuevo.
+
+No modifica el original.
+
+Se usa para transformar datos.
+
+Se combina muy bien con filter() y reduce().

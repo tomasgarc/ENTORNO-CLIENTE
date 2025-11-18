@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Ejercicio 3.</h1>
+    <br>
+    <h3>Introduce los dos valores booleanos.</h3>
+    <input id = "boolean1" type = "text" ></input>
+    <input id = "boolean2" type = "text" ></input><br>
+    <h3>Introduce los dos valores numéricos.</h3>
+    <input id = "num1" type = "number" ></input>
+    <input id = "num2" type = "number" ></input><br>
+    <h3>Introduce las dos cadenas de caracteres.</h3>
+    <input id = "cadena1" type = "text" ></input>
+    <input id = "cadena2" type = "text" ></input><br>
+    <br>
+    <button onclick = "calcular()">Comprobar</button>
+    <br>
+
+    <p id = "result" ></p>
+    <br>
+
+    <h3>Comprobaciones</h3>
+    <p>El texto mayor es:</p>
+    <p id = "textomayor" ></p>
+    <br>
+    <p>La operacion AND es:</p>
+    <p id = "andresult" ></p>
+    <p>La operación OR es:</p>
+    <p id = "orresult" ></p>
+    <br>
+    <p>El resultado de la suma de los números es:</p>
+    <p id = "sumaresult" ></p>
+    <p>El resultado de la multiplicación de los números es:</p>
+    <p id = "multiresult" ></p>
+    <br>
+    <p>Elementos ordenados:</p>
+    <p id = "ordenados" ></p>
+
+    <script>
+            const bool1 = document.getElementById('boolean1').value;
+            const bool2 = document.getElementById('boolean2').value;
+            const nume1 = parceInt(document.getElementById('num1').value);
+            const nume2 = parceInt(document.getElementById('num2').value);
+            const cad1 = document.getElementById('cadena1').value;
+            const cad2 = document.getElementById('cadena2').value;
+
+        function calcular(bool1, bool2, num1, num2, cad1, cad2, hayfallo) {
+
+            const resultElement = document.getElementById('result');
+            resultElement.textContent = "Por favor vuelve a introducir los datos. Hay alguno erroneo";
+
+            if (bool1 === '' || bool2 === '' || num1 === '' || num2 === '' || cad1 === '' || cad2 === '') {
+                resultElement.textContent = "Por favor vuelve a introducir los datos. Hay alguno erroneo";
+                return;
+            }
+
+            let suma = num1 + num2;
+            document.getElementById('sumaresult').textContent = "La suma de los números es de " + suma + ".";
+            let multi = num1 * num2;
+            document.getElementById('multiresult').textContent = "La multiplicación de los números es de " + multi + ".";
+            
+        };
+    </script>
+
+</body>
+</html>
