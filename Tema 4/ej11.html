@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Listar Archivos</title>
+</head>
+<body>
+    <h1>Listar Archivos</h1>
+    <form id="formFS">
+        <label for="fsInput">Introduce un objeto JSON que represente el sistema de archivos:</label><br><br>
+        <textarea id="fsInput" rows="10" cols="50">
+{
+    "carpeta1": {
+        "archivo1": "contenido1",
+        "archivo2": "contenido2",
+        "subcarpeta": {
+            "archivo3": "contenido3"
+        }
+    },
+    "carpeta2": {
+        "archivo4": "contenido4"
+    }
+}
+        </textarea><br><br>
+        <button type="submit">Listar Archivos</button>
+    </form>
+    <p id="resultado"></p>
+
+    <script>
+        function listarArchivos(obj) {
+            let archivos = [];
+            for (let clave in obj) {
+                if (typeof obj[clave] === 'object') {
+                    archivos = archivos.concat(listarArchivos(obj[clave]));
+                } else {
+                    archivos.push(clave);
+                }
+            }
+            return archivos;
+        }
+
+        const form = document.getElementById('formFS');
+        const resultado = document.getElementById('resultado');
+
+        form.addEventListener('submit', function(event) {
+            event.preventDefault();
+            const input = document.getElementById('fsInput').value;
+            try {
+                const fs = JSON.parse(input);
+                const archivos = listarArchivos(fs);
+                resultado.textContent = `Archivos encontrados: [${archivos.join(', ')}]`;
+            } catch (e) {
+                resultado.textContent = 'Error: introduce un objeto JSON válido';
+            }
+        });
+    </script>
+</body>
+</html>

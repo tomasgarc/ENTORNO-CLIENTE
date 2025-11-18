@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Crear Usuario</title>
+</head>
+<body>
+    <h1>Crear Usuario</h1>
+
+    <form id="formUsuario">
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" placeholder="Juan"><br><br>
+
+        <label for="edad">Edad:</label>
+        <input type="number" id="edad" placeholder="20"><br><br>
+
+        <label for="pais">País:</label>
+        <input type="text" id="pais" placeholder="España"><br><br>
+
+        <button type="submit">Crear Usuario</button>
+    </form>
+
+    <p id="resultado"></p>
+
+    <script>
+        function crearUsuario({ nombre = "Desconocido", edad = 0, pais = "Desconocido" } = {}) {
+            return `${nombre}, ${edad} años, ${pais}`;
+        }
+
+        const form = document.getElementById('formUsuario');
+        const resultado = document.getElementById('resultado');
+
+        form.addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const nombre = document.getElementById('nombre').value;
+            const edad = parseInt(document.getElementById('edad').value);
+            const pais = document.getElementById('pais').value;
+
+            const usuario = crearUsuario({ 
+                nombre: nombre || undefined, 
+                edad: isNaN(edad) ? undefined : edad, 
+                pais: pais || undefined 
+            });
+
+            resultado.textContent = usuario;
+        });
+    </script>
+</body>
+</html>

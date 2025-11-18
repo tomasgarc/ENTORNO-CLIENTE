@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Aplanar Array</title>
+</head>
+<body>
+    <h1>Aplanar Array</h1>
+    <form id="formArray">
+        <label for="arrayInput">Introduce un array (ejemplo: [1,[2,[3,4]],5]):</label><br><br>
+        <input type="text" id="arrayInput" size="50"><br><br>
+        <button type="submit">Aplanar</button>
+    </form>
+    <p id="resultado"></p>
+
+    <script>
+        function aplanar(arr) {
+            let resultado = [];
+            for (let elemento of arr) {
+                if (Array.isArray(elemento)) {
+                    resultado = resultado.concat(aplanar(elemento));
+                } else {
+                    resultado.push(elemento);
+                }
+            }
+            return resultado;
+        }
+
+        const form = document.getElementById('formArray');
+        const resultado = document.getElementById('resultado');
+
+        form.addEventListener('submit', function(event) {
+            event.preventDefault();
+            const input = document.getElementById('arrayInput').value;
+            try {
+                const array = JSON.parse(input);
+                const plano = aplanar(array);
+                resultado.textContent = `Array plano: [${plano.join(', ')}]`;
+            } catch (e) {
+                resultado.textContent = 'Error: introduce un array válido en formato JSON';
+            }
+        });
+    </script>
+</body>
+</html>
