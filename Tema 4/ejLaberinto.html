@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const lab = [
+        ["S", " ", "X", " "],
+        ["X", " ", "X", " "],
+        [" ", " ", " ", " "],
+        ["X", "X", " ", "F"]
+    ];
+
+    function resolverLaberinto(lab, x, y, visitado) {
+        if (x < 0 || y < 0 || x >= lab.length || y >= lab[0].length) return false;
+        if (lab[x][y] === "X") return false;
+        if (lab[x][y] === "F") return true;
+        const key = x + "," + y;
+        if (visitado.has(key)) return false;
+        visitado.add(key);
+        return resolverLaberinto(lab, x + 1, y, visitado) ||
+               resolverLaberinto(lab, x - 1, y, visitado) ||
+               resolverLaberinto(lab, x, y + 1, visitado) ||
+               resolverLaberinto(lab, x, y - 1, visitado);
+
+    }
+    </script>
+</body>
+</html>

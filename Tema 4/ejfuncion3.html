@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio3</title>
+</head>
+<body>
+
+    <h3>Validador de Cadena</h3>
+
+    <label>Introduce una cadena:</label>
+    <input type="text" id="cadena"><br><br>
+
+    <button onclick="validar()">Validar</button>
+
+    <p id="resultado"></p>
+
+    <script>
+        var validador = function(texto) {
+            return texto.length > 10;
+        };
+
+        function validar() {
+            var texto = document.getElementById("cadena").value;
+            var esValido = validador(texto);
+
+            if (esValido) {
+                document.getElementById("resultado").innerText = "La cadena tiene más de 10 caracteres.";
+            } else {
+                document.getElementById("resultado").innerText = "La cadena NO supera los 10 caracteres.";
+            }
+        }
+    </script>
+
+</body>
+</html>

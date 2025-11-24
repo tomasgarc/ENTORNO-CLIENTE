@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio2</title>
+</head>
+<body>
+
+    <h3>Sumador con callback</h3>
+
+    <label>Número fijo a añadir:</label>
+    <input type="number" id="fijo"><br><br>
+
+    <label>Número al que se le sumará:</label>
+    <input type="number" id="otro"><br><br>
+
+    <button onclick="calcular()">Calcular</button>
+
+    <p id="resultado"></p>
+
+    <script>
+        function crearSumador(fijo) {
+            return function(numero) {
+                return numero + fijo;
+            }
+        }
+
+        function calcular() {
+            var fijo = parseFloat(document.getElementById("fijo").value);
+            var otro = parseFloat(document.getElementById("otro").value);
+
+            var sumador = crearSumador(fijo);
+            var resultado = sumador(otro);
+
+            document.getElementById("resultado").innerText = "Resultado: " + resultado;
+        }
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Resolver Laberinto</title>
+<style>
+    body { font-family: Arial; padding: 20px; }
+    pre { background: #eee; padding: 10px; width: fit-content; }
+</style>
+</head>
+<body>
+
+<h2>Resolver Laberinto (Recursivo)</h2>
+
+<pre id="lab"></pre>
+<button id="btn">Resolver</button>
+<p id="resultado"></p>
+
+<script>
+const laberinto = [
+["S", " ", "X", " "],
+["X", " ", "X", " "],
+[" ", " ", " ", " "],
+["X", "X", " ", "F"]
+];
+
+function resolverLaberinto(lab, x, y, visitado) {
+    if (x < 0 || y < 0 || x >= lab.length || y >= lab[0].length) return false;
+    if (lab[x][y] === "X") return false;
+    if (lab[x][y] === "F") return true;
+    const key = x + "," + y;
+    if (visitado.has(key)) return false;
+    visitado.add(key);
+    return resolverLaberinto(lab, x + 1, y, visitado) ||
+           resolverLaberinto(lab, x - 1, y, visitado) ||
+           resolverLaberinto(lab, x, y + 1, visitado) ||
+           resolverLaberinto(lab, x, y - 1, visitado);
+}
+
+function existeCamino(lab) {
+    let sx = -1, sy = -1;
+    for (let i = 0; i < lab.length; i++) {
+        for (let j = 0; j < lab[0].length; j++) {
+            if (lab[i][j] === "S") {
+                sx = i; sy = j;
+            }
+        }
+    }
+    return resolverLaberinto(lab, sx, sy, new Set());
+}
+
+document.getElementById("lab").textContent = 
+    laberinto.map(f => f.join(" ")).join("\n");
+
+document.getElementById("btn").onclick = () => {
+    const res = existeCamino(laberinto);
+    document.getElementById("resultado").textContent =
+        res ? "Sí existe un camino hasta el final." : "No existe un camino.";
+};
+</script>
+
+</body>
+</html>

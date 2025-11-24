@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio1</title>
+</head>
+<body>
+
+    <h3>Operaciones</h3>
+
+    <label>Número 1:</label>
+    <input type="number" id="num1"><br><br>
+
+    <label>Número 2:</label>
+    <input type="number" id="num2"><br><br>
+
+    <label>Operación:</label>
+    <select id="operacion">
+        <option value="1">Suma</option>
+        <option value="2">Resta</option>
+        <option value="3">Multiplicación</option>
+    </select><br><br>
+
+    <button onclick="calcular()">Calcular</button>
+
+    <p id="resultado"></p>
+
+    <script>
+        function operar(a, b, callback) {
+            return callback(a, b);
+        }
+
+        function suma(x, y) {
+            return x + y;
+        }
+
+        function resta(x, y) {
+            return x - y;
+        }
+
+        function multiplicacion(x, y) {
+            return x * y;
+        }
+
+        function calcular() {
+            var a = parseFloat(document.getElementById("num1").value);
+            var b = parseFloat(document.getElementById("num2").value);
+            var op = document.getElementById("operacion").value;
+            var resultado;
+
+            if (op === "1") {
+                resultado = operar(a, b, suma);
+            } else if (op === "2") {
+                resultado = operar(a, b, resta);
+            } else if (op === "3") {
+                resultado = operar(a, b, multiplicacion);
+            }
+
+            document.getElementById("resultado").innerText = "Resultado: " + resultado;
+        }
+    </script>
+
+</body>
+</html>
