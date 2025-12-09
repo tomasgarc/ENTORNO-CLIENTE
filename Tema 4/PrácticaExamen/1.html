@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>Capitalizar y Contar Vocales</title>
+</head>
+<body>
+    <h1>Capitalizar y Contar Vocales</h1>
+
+    <p>Introduce un array de palabras (JSON) o escribe palabras separadas por comas o saltos de línea:</p>
+    <textarea id="entrada" rows="6" cols="60">["hola", "mUndo", "árbol", "PIrrAmiDe"]</textarea>
+    <br>
+    <button id="procesar">Procesar</button>
+
+    <h2>Resultado</h2>
+    <pre id="resultado"></pre>
+
+    <script>
+        function capitalizarYContarVocales(words) {
+            var vocales = /[aeiouáéíóúüAEIOUÁÉÍÓÚÜ]/g;
+
+            var palabras = words.map(function (w) {
+                var s = String(w).trim();
+                if (s === "") return s;
+                var first = s.charAt(0).toUpperCase();
+                var rest = s.slice(1).toLowerCase();
+                return first + rest;
+            });
+
+            var totalVocales = 0;
+            words.forEach(function (w) {
+                var m = String(w).match(vocales);
+                if (m) totalVocales += m.length;
+            });
+
+            return {
+                palabras: palabras,
+                totalVocales: totalVocales
+            };
+        }
+
+        function parseInput(text) {
+            text = text.trim();
+            if (!text) return [];
+            try {
+                var parsed = JSON.parse(text);
+                if (Array.isArray(parsed)) return parsed.map(String);
+            } catch (e) {}
+            var parts = text.split(/[\n,]+/);
+            return parts
+                .map(function (p) { return p.trim(); })
+                .filter(function (p) { return p.length > 0; });
+        }
+
+        document.getElementById('procesar').addEventListener('click', function () {
+            var text = document.getElementById('entrada').value;
+            var arr = parseInput(text);
+            var out = capitalizarYContarVocales(arr);
+            document.getElementById('resultado').textContent = JSON.stringify(out, null, 2);
+        });
+
+        window.addEventListener('DOMContentLoaded', function () {
+            document.getElementById('procesar').click();
+        });
+    </script>
+</body>
+</html>

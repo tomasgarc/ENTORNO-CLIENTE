@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>Procesar Tareas - Callbacks</title>
+</head>
+<body>
+    <h1>Procesar Tareas (asincronía con setTimeout)</h1>
+
+    <p>Introduce un array de tareas (JSON):</p>
+    <textarea id="entrada" rows="5" cols="60">[{"id":"A","duracion":300},{"id":"B","duracion":100},{"id":"C","duracion":200}]</textarea>
+    <br><br>
+
+    <button id="iniciar">Iniciar Procesamiento</button>
+
+    <h2>Resultado final</h2>
+    <pre id="resultado"></pre>
+
+    <script>
+        function procesarTareas(tareas, callbackFinal) {
+            var completadas = [];
+            tareas.forEach(function(t) {
+                setTimeout(function() {
+                    console.log("Tarea " + t.id + " completada");
+                    completadas.push(t.id);
+                    if (completadas.length === tareas.length) {
+                        callbackFinal(completadas);
+                    }
+                }, t.duracion);
+            });
+        }
+
+        document.getElementById('iniciar').addEventListener('click', function () {
+            var arr = JSON.parse(document.getElementById('entrada').value);
+            procesarTareas(arr, function(resultado) {
+                document.getElementById('resultado').textContent = JSON.stringify(resultado);
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>Filtrar y Transformar</title>
+</head>
+<body>
+    <h1>Filtrar y Transformar</h1>
+
+    <p>Introduce un array de números (JSON o separados por comas):</p>
+    <textarea id="inputArr" rows="4" cols="50">[1,2,3,4,5,6]</textarea>
+    <br><br>
+
+    <p>Función filtro (arrow function):</p>
+    <input id="inputFiltro" type="text" value="n => n % 2 === 0">
+    <br><br>
+
+    <p>Función transformación (arrow function):</p>
+    <input id="inputTransform" type="text" value="n => n * n">
+    <br><br>
+
+    <button id="procesar">Procesar</button>
+
+    <h2>Resultado</h2>
+    <pre id="resultado"></pre>
+
+    <script>
+        function filtrarYTransformar(arr, filtro, transformacion) {
+            return arr.filter(filtro).map(transformacion);
+        }
+
+        function parseArr(text) {
+            text = text.trim();
+            try {
+                var parsed = JSON.parse(text);
+                if (Array.isArray(parsed)) return parsed.map(Number);
+            } catch(e){}
+            return text.split(/[, ]+/).map(Number);
+        }
+
+        document.getElementById('procesar').addEventListener('click', function () {
+            var arr = parseArr(document.getElementById('inputArr').value);
+            var filtro = eval(document.getElementById('inputFiltro').value);
+            var transformacion = eval(document.getElementById('inputTransform').value);
+            var resultado = filtrarYTransformar(arr, filtro, transformacion);
+            document.getElementById('resultado').textContent = JSON.stringify(resultado, null, 2);
+        });
+    </script>
+</body>
+</html>

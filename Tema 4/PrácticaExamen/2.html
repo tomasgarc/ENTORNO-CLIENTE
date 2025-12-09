@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>Sumar Hasta N (Recursivo)</title>
+</head>
+<body>
+    <h1>Sumar Hasta N (Recursividad)</h1>
+
+    <p>Introduce un número:</p>
+    <input id="numero" type="number" value="5">
+    <button id="calcular">Calcular</button>
+
+    <h2>Resultado</h2>
+    <pre id="resultado"></pre>
+
+    <script>
+        function sumarHasta(n) {
+            if (n <= 0) return 0;
+            return n + sumarHasta(n - 1);
+        }
+
+        document.getElementById('calcular').addEventListener('click', function () {
+            var n = parseInt(document.getElementById('numero').value);
+            var resultado = sumarHasta(n);
+            document.getElementById('resultado').textContent = resultado;
+        });
+    </script>
+</body>
+</html>
