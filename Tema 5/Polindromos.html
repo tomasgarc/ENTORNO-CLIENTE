@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Palíndromo</title>
+</head>
+<body>
+
+    <h1>Comprobador de Palíndromos</h1>
+
+    <label for="palabra">Introduce una palabra o frase:</label><br><br>
+    <input type="text" id="palabra">
+    <button onclick="comprobarPalindromo()">Comprobar</button>
+
+    <p id="resultado"></p>
+
+    <script>
+        function comprobarPalindromo() {
+            let texto = document.getElementById("palabra").value;
+
+            // Pasar a minúsculas y eliminar espacios
+            texto = texto.toLowerCase().replace(/\s+/g, "");
+
+            let textoInvertido = texto.split("").reverse().join("");
+
+            let resultado = document.getElementById("resultado");
+
+            if (texto === "") {
+                resultado.textContent = "Introduce una palabra o frase.";
+            } else if (texto === textoInvertido) {
+                resultado.textContent = "Es un palíndromo.";
+            } else {
+                resultado.textContent = "No es un palíndromo.";
+            }
+        }
+    </script>
+
+</body>
+</html>

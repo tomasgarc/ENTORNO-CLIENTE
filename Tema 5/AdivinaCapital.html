@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Juego de Capitales</title>
+</head>
+<body>
+
+    <!-- Html -->
+
+    <h1>Juego de Adivinar Capitales</h1>
+    
+    <div id="entrada-capitales">
+        <h2>Introduce 6 capitales (mínimo 5 caracteres cada una):</h2>
+        <input type="text" id="capital1" placeholder="Capital 1"><br><br>
+        <input type="text" id="capital2" placeholder="Capital 2"><br><br>
+        <input type="text" id="capital3" placeholder="Capital 3"><br><br>
+        <input type="text" id="capital4" placeholder="Capital 4"><br><br>
+        <input type="text" id="capital5" placeholder="Capital 5"><br><br>
+        <input type="text" id="capital6" placeholder="Capital 6"><br><br>
+        <button onclick="validarCapitales()">Iniciar Juego</button>
+        <p id="error-validacion"></p>
+    </div>
+    
+    <div id="zona-juego">
+        <h2>¡Adivina la capital!</h2>
+        <p><strong>Pista:</strong> <span id="pista"></span></p>
+        <p>Letras reveladas: <span id="contador-letras"></span></p>
+        <input type="text" id="intento" placeholder="Escribe tu respuesta">
+        <button onclick="verificarIntento()">Adivinar</button>
+        <p id="mensaje"></p>
+        <p id="intentos"></p>
+    </div>
+    
+    <div id="zona-final">
+        <h2 id="resultado-final"></h2>
+        <p id="palabra-final"></p>
+        <p id="total-intentos"></p>
+        <button onclick="reiniciarJuego()">Jugar de Nuevo</button>
+    </div>
+
+    <script>
+
+        //Creamos las variables necesarias.
+
+        var capitales = [];
+        var capitalSecreta = "";
+        var letrasReveladas = 0;
+        var intentos = 0;
+        var premio = 0;
+
+        //Función que valida si las capitales son válidas, las mete todas en un array, y comprueba que cada una tenga al menos 5 caracteres.
+        //Si no printea un error.
+
+        function validarCapitales() {
+            capitales = [];
+            var errores = [];
+            
+            for (var i = 1; i <= 6; i++) {
+                var valor = document.getElementById("capital" + i).value.trim();
+                if (valor.length < 5) {
+                    errores.push("Capital " + i + " debe tener al menos 5 caracteres");
+                } else {
+                    capitales.push(valor.toLowerCase());
+                }
+            }
+            
+            //Si el número de errores es mayor de 0, los muestra y no inicia el juego.
+
+            if (errores.length > 0) {
+                document.getElementById("error-validacion").innerHTML = errores.join("<br>");
+                return;
+            }
+            
+            //Si no hay errores, empieza el juego.
+
+            document.getElementById("error-validacion").innerHTML = "";
+            iniciarJuego();
+        }
+
+        //Función que elige aleatoriamente una de las capitales de las introducidas.
+        //Crea también las variables necesarias.
+        //Y setea los mensajes del html a "".
+
+        function iniciarJuego() {
+            var indiceAleatorio = Math.floor(Math.random() * capitales.length);
+            capitalSecreta = capitales[indiceAleatorio];
+            letrasReveladas = 0;
+            intentos = 0;
+            
+            actualizarPista();
+            document.getElementById("mensaje").innerHTML = "";
+            document.getElementById("intentos").innerHTML = "";
+            document.getElementById("intento").value = "";
+        }
+
+        //Función encargada de generar una pista mediante las letras de la capital secreta.
+        //Y ademas añade guiones bajos a las letras que quedan por revelar.
+
+        function generarPista() {
+            var pista = "";
+            for (var i = 0; i < capitalSecreta.length; i++) {
+                if (i < letrasReveladas) {
+                    pista += capitalSecreta[i] + " ";
+                } else {
+                    pista += "_ ";
+                }
+            }
+            return pista;
+        }
+
+        //Función que llama a la función generarPista cada vez que se verifica un intento.
+        //Y actualiza el contador de letras reveladas.
+
+        function actualizarPista() {
+            document.getElementById("pista").innerHTML = generarPista();
+            document.getElementById("contador-letras").innerHTML = letrasReveladas + "/" + capitalSecreta.length;
+        }
+
+        //Función encargada de comprobar si el intento del usuario es correcto.
+        //Primero pasa el intento a minúsculas y elimina los espacios en blanco.
+        //Suma 1 al número de intentos.
+
+        //Si el intento es igual a la capital secreta, llama a la función mostrarResultado con true.
+
+        //En cambio, si es incorrecta, aumenta el número de letras reveladas en 1.
+        //Comprueba si el número de letras reveladas es mayor o igual a los caracteres de la capital secreta.
+        //Si es así, llama a la funciión mostrarResultado con false.
+
+        //Si ninguna se cumple, actualiza la pista, enseña un mensaje de fallo y actualiza el contador de intentos.
+
+        function verificarIntento() {
+            var intento = document.getElementById("intento").value.trim().toLowerCase();
+            intentos++;
+            
+            if (intento === capitalSecreta) {
+                mostrarResultado(true);
+                return;
+            }
+            
+            letrasReveladas++;
+            
+            if (letrasReveladas >= capitalSecreta.length) {
+                mostrarResultado(false);
+                return;
+            }
+            
+            actualizarPista();
+            document.getElementById("mensaje").innerHTML = "Incorrecto. ¡Intenta de nuevo!";
+            document.getElementById("intentos").innerHTML = "Intentos: " + intentos;
+            document.getElementById("intento").value = "";
+            document.getElementById("intento").focus();
+        }
+
+        //Función que muestra el resultado del juego.
+
+        //Si el usuario gana, calcula el premio según su número de intentos.
+        //1 -> 500€, 2 -> 300€, 3 -> 100€, más de 3 -> 0€.
+        //Muestra un mensaje de victoria y el premio.
+
+        //En caso de false, muestra un mensaje de derrota.
+
+        //Y al final dice cual era la capital secreta y tu total de intentos.
+
+        function mostrarResultado(gano) {
+            var mensajePremio = "";
+
+            if (gano) {
+
+                if (intentos === 1) {
+                    premio = 500;
+                } else if (intentos === 2) {
+                    premio = 300;
+                } else if (intentos === 3) {
+                    premio = 100;
+                } else {
+                    premio = 0;
+                }
+                
+                document.getElementById("resultado-final").innerHTML = "¡FELICIDADES! ¡Ganaste!";
+                mensajePremio = "Has ganado " + premio + " €";
+            } else {
+                document.getElementById("resultado-final").innerHTML = "¡Oh no! Perdiste";
+            }
+            
+            document.getElementById("palabra-final").innerHTML = "La capital era: " + capitalSecreta.toUpperCase();
+            document.getElementById("total-intentos").innerHTML = "Total de intentos: " + intentos + "<br>" + mensajePremio;
+        }
+
+        //Esta función reinicia el juego, poniendo todos los campos y variables vacios o a 0.
+
+        function reiniciarJuego() {
+
+            for (var i = 1; i <= 6; i++) {
+                document.getElementById("capital" + i).value = "";
+            }
+            
+            capitales = [];
+            capitalSecreta = "";
+            letrasReveladas = 0;
+            intentos = 0;
+        }
+    </script>
+</body>
+</html>

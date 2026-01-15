@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Juego de Adivinar la Palabra</title>
+</head>
+<body>
+
+<script>
+    let palabras = [];
+
+    for (let i = 0; i < 8; i++) {
+        let palabra;
+        do {
+            palabra = prompt("Introduce una palabra (mínimo 6 letras):");
+        } while (palabra.length < 6);
+
+        palabras.push(palabra.toUpperCase());
+    }
+
+    let posicionAleatoria = Math.floor(Math.random() * palabras.length);
+    let palabraSecreta = palabras[posicionAleatoria];
+
+    let intentos = 1;
+    let acertado = false;
+
+    while (!acertado && intentos <= palabraSecreta.length) {
+        let pista = palabraSecreta.substring(0, intentos);
+        let intentoUsuario = prompt(
+            "Pista: " + pista + "\nIntroduce la palabra completa:"
+        ).toUpperCase();
+
+        if (intentoUsuario === palabraSecreta) {
+            acertado = true;
+        } else {
+            intentos++;
+        }
+    }
+
+    if (acertado) {
+        alert("¡Has ganado! La palabra era: " + palabraSecreta);
+    } else {
+        alert("Has perdido. La palabra era: " + palabraSecreta);
+    }
+</script>
+
+</body>
+</html>
