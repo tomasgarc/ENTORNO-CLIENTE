@@ -66,20 +66,33 @@
 
     // Función para "dibujar" el DOM basándose en el Array
     function renderizarTabla() {
-        // Limpiamos la tabla antes de volver a pintar
         tabla.innerHTML = "";
 
-        // Recorremos el array de objetos
         alumnos.forEach(alumno => {
             const fila = document.createElement('tr');
+
+            // Convertimos la nota a número
+            const nota = Number(alumno.nota);
+
+            // Creamos la celda de la nota
+            const celdaNota = document.createElement('td');
+            celdaNota.textContent = nota;
+
+            // Si la nota es menor de 5, la ponemos en rojo
+            if (nota < 5) {
+                celdaNota.style.color = "red";
+                celdaNota.style.fontWeight = "bold";
+            }
+
             fila.innerHTML = `
                 <td>${alumno.nombre}</td>
                 <td>${alumno.email}</td>
-                <td>${alumno.nota}</td>
             `;
-            tabla.appendChild(fila);
-        });
-    }
+
+        fila.appendChild(celdaNota);
+        tabla.appendChild(fila);
+    });
+}
 </script>
 
 </body>
