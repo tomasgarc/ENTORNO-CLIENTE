@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Potencia Recursiva - Flecha</title>
+</head>
+<body>
+
+<h2>Potencia recursiva (función flecha)</h2>
+
+<label>
+  Base:
+  <input type="number" id="base">
+</label>
+<br><br>
+
+<label>
+  Exponente:
+  <input type="number" id="exponente">
+</label>
+<br><br>
+
+<button onclick="calcular()">Calcular</button>
+
+<p id="resultado"></p>
+
+<script>
+  const potencia = (base, exponente) => {
+    if (exponente === 0) {
+      return 1;
+    }
+    return base * potencia(base, exponente - 1);
+  };
+
+  const calcular = () => {
+    const base = Number(document.getElementById("base").value);
+    const exponente = Number(document.getElementById("exponente").value);
+
+    const resultado = potencia(base, exponente);
+    document.getElementById("resultado").textContent =
+      base + "^" + exponente + " = " + resultado;
+  };
+</script>
+
+</body>
+</html>

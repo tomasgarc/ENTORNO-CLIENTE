@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Ejercicio DOM</title>
+</head>
+<body>
+
+<h1 id="titulo">Ejercicio de repaso DOM</h1>
+
+<!-- 1. Cambiar texto -->
+<h3>Cambiar texto</h3>
+<input type="text" id="textoInput">
+<button onclick="cambiarTexto()">Cambiar título</button>
+
+<hr>
+
+<!-- 2. Cambiar color -->
+<h3>Cambiar color</h3>
+<button onclick="cambiarColor()">Cambiar color del título</button>
+
+<hr>
+
+<!-- 3. Suma -->
+<h3>Suma de números</h3>
+<input type="number" id="num1">
+<input type="number" id="num2">
+<button onclick="sumar()">Sumar</button>
+<p id="resultadoSuma"></p>
+
+<hr>
+
+<!-- 4. Lista dinámica -->
+<h3>Añadir elementos a una lista</h3>
+<input type="text" id="itemInput">
+<button onclick="agregarItem()">Añadir</button>
+<ul id="lista"></ul>
+
+<hr>
+
+<!-- 5. Mostrar / ocultar -->
+<h3>Mostrar / ocultar texto</h3>
+<button onclick="toggleTexto()">Mostrar / Ocultar</button>
+<p id="textoOculto">Este texto se puede ocultar</p>
+
+<hr>
+
+<!-- 6. Validación -->
+<h3>Validación simple</h3>
+<input type="text" id="nombre">
+<button onclick="validar()">Validar</button>
+<p id="mensajeValidacion"></p>
+
+<script>
+// 1. Cambiar texto del título
+function cambiarTexto() {
+    const texto = document.getElementById("textoInput").value;
+    document.getElementById("titulo").textContent = texto;
+}
+
+// 2. Cambiar color del título
+function cambiarColor() {
+    const titulo = document.querySelector("#titulo");
+    titulo.style.color = titulo.style.color === "red" ? "black" : "red";
+}
+
+// 3. Sumar números
+function sumar() {
+    const n1 = Number(document.getElementById("num1").value);
+    const n2 = Number(document.getElementById("num2").value);
+
+    document.getElementById("resultadoSuma").textContent =
+        "Resultado: " + (n1 + n2);
+}
+
+// 4. Añadir elementos a una lista
+function agregarItem() {
+    const texto = document.getElementById("itemInput").value;
+
+    if (texto === "") return;
+
+    const li = document.createElement("li");
+    li.textContent = texto;
+
+    document.getElementById("lista").appendChild(li);
+    document.getElementById("itemInput").value = "";
+}
+
+// 5. Mostrar / ocultar texto
+function toggleTexto() {
+    const texto = document.getElementById("textoOculto");
+    texto.style.display = texto.style.display === "none" ? "block" : "none";
+}
+
+// 6. Validación simple
+function validar() {
+    const nombre = document.getElementById("nombre").value;
+    const mensaje = document.getElementById("mensajeValidacion");
+
+    if (nombre.length < 3) {
+        mensaje.textContent = "❌ El nombre es demasiado corto";
+    } else {
+        mensaje.textContent = "✅ Nombre válido";
+    }
+}
+</script>
+
+</body>
+</html>

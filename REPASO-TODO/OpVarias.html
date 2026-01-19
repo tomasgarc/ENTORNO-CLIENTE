@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Ejercicio 3</title>
+</head>
+<body>
+
+<h1>Ejercicio 3</h1>
+
+<h3>Introduce los dos valores booleanos (true / false)</h3>
+<input id="boolean1" type="text">
+<input id="boolean2" type="text"><br><br>
+
+<h3>Introduce los dos valores numéricos</h3>
+<input id="num1" type="number">
+<input id="num2" type="number"><br><br>
+
+<h3>Introduce las dos cadenas de caracteres</h3>
+<input id="cadena1" type="text">
+<input id="cadena2" type="text"><br><br>
+
+<button onclick="calcular()">Comprobar</button>
+
+<p id="result"></p>
+
+<h3>Comprobaciones</h3>
+
+<p>El texto mayor es:</p>
+<p id="textomayor"></p>
+
+<p>La operación AND es:</p>
+<p id="andresult"></p>
+
+<p>La operación OR es:</p>
+<p id="orresult"></p>
+
+<p>Resultado de la suma:</p>
+<p id="sumaresult"></p>
+
+<p>Resultado de la multiplicación:</p>
+<p id="multiresult"></p>
+
+<p>Elementos ordenados:</p>
+<p id="ordenados"></p>
+
+<script>
+function calcular() {
+
+    // Leer valores
+    const bool1Str = document.getElementById("boolean1").value.toLowerCase();
+    const bool2Str = document.getElementById("boolean2").value.toLowerCase();
+    const num1 = Number(document.getElementById("num1").value);
+    const num2 = Number(document.getElementById("num2").value);
+    const cad1 = document.getElementById("cadena1").value;
+    const cad2 = document.getElementById("cadena2").value;
+
+    const result = document.getElementById("result");
+
+    // Validaciones
+    if (
+        (bool1Str !== "true" && bool1Str !== "false") ||
+        (bool2Str !== "true" && bool2Str !== "false") ||
+        isNaN(num1) || isNaN(num2) ||
+        cad1 === "" || cad2 === ""
+    ) {
+        result.textContent = "Datos incorrectos. Revisa los valores introducidos.";
+        return;
+    }
+
+    result.textContent = "Datos correctos.";
+
+    // Convertir a booleanos reales
+    const bool1 = bool1Str === "true";
+    const bool2 = bool2Str === "true";
+
+    // Operaciones lógicas
+    document.getElementById("andresult").textContent = bool1 && bool2;
+    document.getElementById("orresult").textContent = bool1 || bool2;
+
+    // Comprobar cadena mayor (por longitud)
+    const mayorTexto = cad1.length >= cad2.length ? cad1 : cad2;
+    document.getElementById("textomayor").textContent = mayorTexto;
+
+    // Operaciones numéricas
+    document.getElementById("sumaresult").textContent = num1 + num2;
+    document.getElementById("multiresult").textContent = num1 * num2;
+
+    // Ordenar todos los elementos
+    const elementos = [bool1, bool2, num1, num2, cad1, cad2];
+    elementos.sort();
+
+    document.getElementById("ordenados").textContent = elementos.join(", ");
+}
+</script>
+
+</body>
+</html>
