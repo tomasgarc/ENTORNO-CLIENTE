@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Ejercicio 2</title>
+</head>
+<body>
+	<h2>Validación de Usuario</h2>
+	<input type="text" id="username" placeholder="Introduce tu nombre de usuario">
+	<input type="number" id="age" placeholder="Introduce tu edad">
+	<button onclick="validateUser()">Validar</button>
+
+	<script>
+		function validateUser() {
+			let username = document.getElementById("username").value;
+			if (username === "") {
+				alert("Error: El nombre de usuario no puede estar vacío.");
+			} else {
+				let age = parseInt(document.getElementById("age").value);
+				if (!isNaN(age) && age >= 0) {
+					document.write(`Usuario ${username} registrado correctamente.`);
+				} else {
+					document.write("Edad no válida.");
+				}
+			}
+		}
+	</script>
+</body>
+</html>

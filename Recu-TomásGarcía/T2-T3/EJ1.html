@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Ejercicio 1</title>
+</head>
+<body>
+	<h2>La Escalera de Números</h2>
+	<input type="number" id="num" placeholder="Introduce un número entero">
+	<button onclick="printPiramide()">Mostrar Pirámide</button>
+
+	<script>
+		function printPiramide() {
+			let num = parseInt(document.getElementById("num").value);
+			for (let i = 1; i <= num; i++) {
+				let str = "";
+				for (let j = 1; j <= i; j++) {
+					str += j;
+				}
+				console.log(str);
+			}
+		}
+	</script>
+</body>
+</html>

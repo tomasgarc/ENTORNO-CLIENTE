@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Ejercicio 3</title>
+</head>
+<body>
+	<h2>Estructura de Datos Map</h2>
+	<button onclick="createMap()">Crear Mapa</button>
+
+	<script>
+		let productos = new Map();
+
+		function createMap() {
+			productos.set("P01", { nombre: "Portatil", categoria: "Electrónica", precio: 20 });
+			productos.set("P02", { nombre: "Camiseta", categoria: "Ropa", precio: 30 });
+			productos.set("P03", { nombre: "Lego", categoria: "Juguetes", precio: 10 });
+			productos.set("P04", { nombre: "Monitor", categoria: "Electrónica", precio: 40 });
+			productos.set("P05", { nombre: "Raqueta de tenis", categoria: "Deportes", precio: 60 });
+
+			console.log(productos);
+		}
+	</script>
+</body>
+</html>

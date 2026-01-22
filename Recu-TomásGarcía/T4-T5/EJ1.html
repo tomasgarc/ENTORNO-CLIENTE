@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 1</title>
+</head>
+<body>
+    <h1>Sintaxis de Funciones</h1>
+    <button onclick="calcular()">Ejercicio 1</button>
+
+    <script>
+        function calcular() {
+            let num1 = parseFloat(prompt("Introduce el primer número:"));
+            let num2 = parseFloat(prompt("Introduce el segundo número:"));
+
+            const multiplicar = (a, b) => a * b;
+
+            const dividir = function(a, b) {
+                if (b === 0) return "Error: División por 0";
+                return a / b;
+            }
+
+            alert(`Multiplicación: ${multiplicar(num1, num2)}\nDivisión: ${dividir(num1, num2)}`);
+        }
+    </script>
+</body>
+</html>
