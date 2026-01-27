@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <h1>Equipo Pokémon</h1>
+
+    <button onclick="cargarPokemon()">Cargar equipo</button>
+
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Foto</th>
+                <th>Nombre</th>
+                <th>Experiencia base</th>
+            </tr>
+        </thead>
+        <tbody id="tablaPokemon">
+        </tbody>
+    </table>
+
+    <script>
+        const idsPokemon = [10, 11, 12];
+
+        async function cargarPokemon() {
+            const tbody = document.getElementById("tablaPokemon");
+            tbody.innerHTML = ""; // Limpiar tabla
+
+            for (const id of idsPokemon) {
+                const respuesta = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`);
+                const pokemon = await respuesta.json();
+
+                const fila = document.createElement("tr");
+
+                fila.innerHTML = `
+                    <td><img src="${pokemon.sprites.front_default}"></td>
+                    <td>${pokemon.name}</td>
+                    <td>${pokemon.base_experience}</td>
+                `;
+
+                tbody.appendChild(fila);
+            }
+        }
+    </script>
+
+</body>
+</html>
