@@ -1,39 +1,49 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+    <meta charset="UTF-8">
     <style>
         body { font-family: 'Segoe UI', sans-serif; padding: 30px; background-color: #f4f7f6; }
-        .container { background: white; padding: 20px; border-radius: 10px; max-width: 500px; margin: auto; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+        .container { background: white; padding: 20px; border-radius: 10px; max-width: 800px; margin: auto; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
         h2 { color: #333; text-align: center; }
-        input { width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ddd; border-radius: 5px; box-sizing: border-box; }
+        input { width: 100%; padding: 10px; margin: 6px 0; border: 1px solid #ddd; border-radius: 5px; }
         
-        .botones { display: flex; gap: 10px; }
+        .botones { display: flex; gap: 10px; flex-wrap: wrap; }
         button { flex: 1; padding: 12px; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; color: white; }
         
         .btn-add { background-color: #007bff; }
         .btn-clear { background-color: #dc3545; }
-        
+        .btn-json { background-color: #28a745; }
+        .btn-upload { background-color: #6f42c1; }
+
         table { width: 100%; border-collapse: collapse; margin-top: 20px; }
-        th, td { padding: 12px; text-align: left; border-bottom: 1px solid #eee; }
+        th, td { padding: 10px; text-align: left; border-bottom: 1px solid #eee; }
     </style>
 </head>
 <body>
 
 <div class="container">
     <h2>Listado con Persistencia</h2>
+
     <form id="formAlumno">
-        <input type="text" id="nombre" placeholder="Nombre del alumno" required>
-        <input type="text" id="apellidos" placeholder="Apellidos del alumno" required>
-        <input type="number" id="edad" placeholder="Edad del alumno" required>
-        <input type="number" id="nota" placeholder="Nota del alumno" required>
-        <input type="number" id="movil" placeholder="Móvil del alumno" required>
+        <input type="text" id="nombre" placeholder="Nombre" required>
+        <input type="text" id="apellidos" placeholder="Apellidos" required>
+        <input type="number" id="edad" placeholder="Edad" min="1" required>
+        <input type="number" id="nota" placeholder="Nota" min="0" max="10" step="0.1" required>
+        <input type="text" id="movil" placeholder="Móvil (9 dígitos, empieza por 6)" required>
+
         <div class="botones">
             <button type="submit" class="btn-add">Añadir Alumno</button>
             <button type="button" id="btnBorrarTodo" class="btn-clear">Borrar Todo</button>
+            <button type="button" id="btnDescargar" class="btn-json">Descargar JSON</button>
+            <label class="btn-upload">
+                Subir JSON
+                <input type="file" id="inputJson" accept=".json" hidden>
+            </label>
         </div>
     </form>
 
-    <table id="tabla">
+    <table>
         <thead>
             <tr>
                 <th>#</th>
@@ -49,50 +59,103 @@
 </div>
 
 <script>
-    // --- 1. INICIALIZACIÓN (Cargar datos del LocalStorage) ---
-    // Intentamos leer la lista guardada; si no existe, empezamos con un array vacío
+    // --- 1. CARGA INICIAL ---
     let alumnos = JSON.parse(localStorage.getItem('alumnos_dwec')) || [];
 
     const form = document.getElementById('formAlumno');
     const cuerpo = document.getElementById('cuerpo');
     const btnClear = document.getElementById('btnBorrarTodo');
+    const btnDescargar = document.getElementById('btnDescargar');
+    const inputJson = document.getElementById('inputJson');
 
-    // Al arrancar, pintamos lo que haya en memoria
     renderizar();
 
-    // --- 2. GESTIÓN DE DATOS ---
-
+    // --- 2. AÑADIR ALUMNO ---
     form.addEventListener('submit', (e) => {
         e.preventDefault();
-        
-        const nuevo = { nombre: document.getElementById('nombre').value };
-        
-        alumnos.push(nuevo);
-        guardarYSincronizar(); // Guardamos y pintamos
+
+        const movil = document.getElementById('movil').value;
+
+        // Validación del móvil
+        if (!/^6\d{8}$/.test(movil)) {
+            alert("El móvil debe tener 9 dígitos y empezar por 6");
+            return;
+        }
+
+        const alumno = {
+            nombre: document.getElementById('nombre').value,
+            apellidos: document.getElementById('apellidos').value,
+            edad: Number(document.getElementById('edad').value),
+            nota: Number(document.getElementById('nota').value),
+            movil: movil
+        };
+
+        alumnos.push(alumno);
+        guardarYSincronizar();
         form.reset();
     });
 
+    // --- 3. BORRAR TODO ---
     btnClear.addEventListener('click', () => {
-        if(confirm("¿Seguro que quieres borrar toda la lista?")) {
+        if (confirm("¿Seguro que quieres borrar todos los alumnos?")) {
             alumnos = [];
             guardarYSincronizar();
         }
     });
 
-    // --- 3. PERSISTENCIA Y VISTA ---
+    // --- 4. DESCARGAR JSON ---
+    btnDescargar.addEventListener('click', () => {
+        const blob = new Blob([JSON.stringify(alumnos, null, 2)], { type: "application/json" });
+        const url = URL.createObjectURL(blob);
 
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = "alumnos.json";
+        a.click();
+
+        URL.revokeObjectURL(url);
+    });
+
+    // --- 5. SUBIR JSON Y MODIFICAR LOCALSTORAGE ---
+    inputJson.addEventListener('change', (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+
+        const reader = new FileReader();
+        reader.onload = () => {
+            try {
+                const datos = JSON.parse(reader.result);
+                if (Array.isArray(datos)) {
+                    alumnos = datos;
+                    guardarYSincronizar();
+                } else {
+                    alert("El archivo JSON no tiene un formato válido");
+                }
+            } catch {
+                alert("Error al leer el archivo JSON");
+            }
+        };
+        reader.readAsText(file);
+    });
+
+    // --- 6. PERSISTENCIA Y VISTA ---
     function guardarYSincronizar() {
-        // Convertimos el array a STRING para guardarlo en LocalStorage
         localStorage.setItem('alumnos_dwec', JSON.stringify(alumnos));
         renderizar();
     }
 
     function renderizar() {
         cuerpo.innerHTML = "";
-        alumnos.forEach((alum, i) => {
-            const tr = document.createElement('tr');
-            tr.innerHTML = `<td>${i + 1}</td><td>${alum.nombre}</td>`;
-            cuerpo.appendChild(tr);
+        alumnos.forEach((a, i) => {
+            cuerpo.innerHTML += `
+                <tr>
+                    <td>${i + 1}</td>
+                    <td>${a.nombre}</td>
+                    <td>${a.apellidos}</td>
+                    <td>${a.edad}</td>
+                    <td>${a.nota}</td>
+                    <td>${a.movil}</td>
+                </tr>`;
         });
     }
 </script>
